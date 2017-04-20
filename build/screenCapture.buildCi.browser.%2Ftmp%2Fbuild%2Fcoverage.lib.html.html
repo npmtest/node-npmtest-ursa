@@ -1,0 +1,2470 @@
+<html lang="en"><head>
+    <title>Code coverage report for node-npmtest-ursa/node_modules/ursa/lib/ursa.js</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-ursa">npmtest-ursa (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-ursa/node_modules/ursa/lib/ursa.js</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">23.05% <small>(68 / 295)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 95)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 54)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">23.21% <small>(68 / 293)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> » <a href="index.html">node-npmtest-ursa/node_modules/ursa/lib/</a> » ursa.js</div>
+</div>
+<div class="body">
+<pre><table class="coverage">
+<tbody><tr><td class="line-count">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+47
+48
+49
+50
+51
+52
+53
+54
+55
+56
+57
+58
+59
+60
+61
+62
+63
+64
+65
+66
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87
+88
+89
+90
+91
+92
+93
+94
+95
+96
+97
+98
+99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725
+726
+727
+728
+729
+730
+731
+732
+733
+734
+735
+736
+737
+738
+739
+740
+741
+742
+743
+744
+745
+746
+747
+748
+749
+750</td><td class="line-coverage"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">// Copyright 2012 The Obvious Corporation.
+&nbsp;
+/*
+ * "ursa": RSA crypto, with an emphasis on Buffer objects
+ */
+&nbsp;
+/*
+ * Modules used
+ */
+&nbsp;
+"use strict";
+&nbsp;
+// Note: This also forces OpenSSL to be initialized, which is important!
+var crypto = require("crypto");
+&nbsp;
+var assert = require("assert");
+&nbsp;
+var ursaNative = require("bindings")("ursaNative");
+var RsaWrap    = ursaNative.RsaWrap;
+var textToNid  = ursaNative.textToNid;
+&nbsp;
+&nbsp;
+/*
+ * Variable definitions
+ */
+&nbsp;
+/** encoding constant */
+var BASE64 = "base64";
+&nbsp;
+/** encoding constant */
+var BINARY = "binary";
+&nbsp;
+/** encoding constant */
+var HEX = "hex";
+&nbsp;
+/** type name */
+var STRING = "string";
+&nbsp;
+/** encoding constant */
+var UTF8 = "utf8";
+&nbsp;
+/** hash algorithm constant */
+var MD5 = "md5";
+&nbsp;
+/** regex that matches PEM files, capturing the file type */
+var PEM_REGEX =
+    /^(-----BEGIN (.*) KEY-----\r?\n[:\s,-\/+=a-zA-Z0-9\r\n]*\r?\n-----END \2 KEY-----\r?\n)/m;
+&nbsp;
+/** "unsealer" key object to authenticate objects */
+var theUnsealer = [ "ursa unsealer" ];
+&nbsp;
+&nbsp;
+/*
+ * Helper functions
+ */
+&nbsp;
+/**
+ * Return true iff x is either a string or a Buffer.
+ */
+<span class="fstat-no" title="function not covered">function isStringOrBuffer(x) {</span>
+<span class="cstat-no" title="statement not covered">    return (typeof x === STRING) || Buffer.isBuffer(x);</span>
+}
+&nbsp;
+/**
+ * Extract and identify the PEM file type represented in the given
+ * buffer. Returns the extracted type string or undefined if the
+ * buffer doesn't seem to be any sort of PEM format file.
+ */
+<span class="fstat-no" title="function not covered">function identifyPemType(buf) {</span>
+<span class="cstat-no" title="statement not covered">    var str = encodeBuffer(buf, UTF8);</span>
+<span class="cstat-no" title="statement not covered">    var match = PEM_REGEX.exec(str);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (!match) {</span>
+<span class="cstat-no" title="statement not covered">        return undefined;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return match[2];</span>
+}
+&nbsp;
+/**
+ * Return whether the given buffer or string appears (trivially) to be a
+ * valid public key file in PEM format.
+ */
+<span class="fstat-no" title="function not covered">function isPublicKeyPem(buf) {</span>
+<span class="cstat-no" title="statement not covered">    var kind = identifyPemType(buf);</span>
+<span class="cstat-no" title="statement not covered">    return (kind == "PUBLIC");</span>
+}
+&nbsp;
+/**
+ * Return whether the given buffer or string appears (trivially) to be a
+ * valid private key file in PEM format.
+ */
+<span class="fstat-no" title="function not covered">function isPrivateKeyPem(buf) {</span>
+<span class="cstat-no" title="statement not covered">    var kind = identifyPemType(buf);</span>
+<span class="cstat-no" title="statement not covered">    return (kind == "RSA PRIVATE");</span>
+}
+&nbsp;
+/**
+ * Return a buffer containing the encoding of the given bigint for use
+ * as part of an SSH-style public key file. The input value must be a
+ * buffer representing an unsigned bigint in big-endian order.
+ */
+<span class="fstat-no" title="function not covered">function toSshBigint(value) {</span>
+    // The output is signed, so we need to add an extra 00 byte at the
+    // head if the high-order bit is set.
+<span class="cstat-no" title="statement not covered">    var prefix00 = ((value[0] &amp; 0x80) !== 0);</span>
+<span class="cstat-no" title="statement not covered">    var length = value.length + (prefix00 ? 1 : 0);</span>
+<span class="cstat-no" title="statement not covered">    var result = new Buffer(length + 4);</span>
+<span class="cstat-no" title="statement not covered">    var offset = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    result.writeUInt32BE(length, offset);</span>
+<span class="cstat-no" title="statement not covered">    offset += 4;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (prefix00) {</span>
+<span class="cstat-no" title="statement not covered">	result[offset] = 0;</span>
+<span class="cstat-no" title="statement not covered">	offset++;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    value.copy(result, offset);</span>
+<span class="cstat-no" title="statement not covered">    return result;</span>
+}
+&nbsp;
+/**
+ * Create and return a buffer containing an SSH-style public key file for
+ * the given RsaWrap object.
+ *
+ * For the record, an SSH-style public key file consists of three
+ * concatenated values, each one length-prefixed:
+ *
+ *     literal string "ssh-rsa"
+ *     exponent
+ *     modulus
+ *
+ * The literal string header is length-prefixed.  The two numbers are
+ * represented as signed big-int values in big-endian order, also
+ * length-prefixed.
+ */
+<span class="fstat-no" title="function not covered">function createSshPublicKey(rsa) {</span>
+<span class="cstat-no" title="statement not covered">    var e = toSshBigint(rsa.getExponent());</span>
+<span class="cstat-no" title="statement not covered">    var m = toSshBigint(rsa.getModulus());</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var header = toSshBigint(new Buffer("ssh-rsa", UTF8));</span>
+<span class="cstat-no" title="statement not covered">    var result = new Buffer(header.length + m.length + e.length);</span>
+<span class="cstat-no" title="statement not covered">    var offset = 0;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    header.copy(result, offset);</span>
+<span class="cstat-no" title="statement not covered">    offset += header.length;</span>
+<span class="cstat-no" title="statement not covered">    e.copy(result, offset);</span>
+<span class="cstat-no" title="statement not covered">    offset += e.length;</span>
+<span class="cstat-no" title="statement not covered">    m.copy(result, offset);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return result;</span>
+}
+&nbsp;
+/**
+ * Validate the given encoding name. Throws an exception if invalid.
+ */
+<span class="fstat-no" title="function not covered">function validateEncoding(encoding) {</span>
+<span class="cstat-no" title="statement not covered">    switch (encoding) {</span>
+        case BASE64:
+        case BINARY:
+        case HEX:
+        case UTF8: {
+            // These are all valid.
+<span class="cstat-no" title="statement not covered">            break;</span>
+        }
+        default: {
+<span class="cstat-no" title="statement not covered">            throw new Error("Invalid encoding: " + encoding);</span>
+        }
+    }
+}
+&nbsp;
+/**
+ * Convert a buffer into an appropriately-encoded string, or return it
+ * unmodified if the encoding is undefined.
+ */
+<span class="fstat-no" title="function not covered">function encodeBuffer(buf, encoding) {</span>
+<span class="cstat-no" title="statement not covered">    if (encoding === undefined) {</span>
+<span class="cstat-no" title="statement not covered">        return buf;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    validateEncoding(encoding);</span>
+<span class="cstat-no" title="statement not covered">    return buf.toString(encoding);</span>
+}
+&nbsp;
+/**
+ * Return a buffer or undefined argument as-is, or convert a given
+ * string into a buffer by using the indicated encoding. An undefined
+ * encoding is interpreted to mean UTF8.
+ */
+<span class="fstat-no" title="function not covered">function decodeString(str, encoding) {</span>
+<span class="cstat-no" title="statement not covered">    if ((str === undefined) || Buffer.isBuffer(str)) {</span>
+<span class="cstat-no" title="statement not covered">        return str;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (encoding === undefined) {</span>
+<span class="cstat-no" title="statement not covered">        encoding = UTF8;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    validateEncoding(encoding);</span>
+<span class="cstat-no" title="statement not covered">    return new Buffer(str, encoding);</span>
+}
+/**
+ * OpenSSH Public key to RSA
+ * @param {String|Object} key OpenSSH Public Key
+ * @param &lt;String&gt; key encoding, default 'base64'
+ * @returns {PublicKey}
+ */
+<span class="fstat-no" title="function not covered">function openSshPublicKey(key, encoding) {</span>
+<span class="cstat-no" title="statement not covered">    if (!Buffer.isBuffer(key)) {</span>
+<span class="cstat-no" title="statement not covered">        key = key.substr(0, 3) === 'ssh' ? key.split(' ')[1] : key;</span>
+<span class="cstat-no" title="statement not covered">        key = new Buffer(key, encoding || 'base64');</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function parsePublicKey(key) {</span>
+<span class="cstat-no" title="statement not covered">        var parts = [],</span>
+            partsLength = 3;
+&nbsp;
+<span class="cstat-no" title="statement not covered">        while(key.length) {</span>
+<span class="cstat-no" title="statement not covered">            var dLen = key.readInt32BE(0);</span>
+<span class="cstat-no" title="statement not covered">            var data = key.slice(4, dLen+4);</span>
+<span class="cstat-no" title="statement not covered">            key = key.slice(4+dLen);</span>
+<span class="cstat-no" title="statement not covered">            parts.push(data);</span>
+<span class="cstat-no" title="statement not covered">            if (!(--partsLength)) <span class="cstat-no" title="statement not covered">break;</span></span>
+        }
+&nbsp;
+<span class="cstat-no" title="statement not covered">        return {</span>
+            modulus :   parts[2],
+            exponent:   parts[1],
+            type    :   parts[0]
+        };
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var pubKey = parsePublicKey(key);</span>
+<span class="cstat-no" title="statement not covered">    var rsa = new RsaWrap();</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (pubKey.type != 'ssh-rsa') {</span>
+<span class="cstat-no" title="statement not covered">        throw new TypeError('Only "ssh-rsa" format supported');</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    rsa.openPublicSshKey(pubKey.modulus, pubKey.exponent);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return PublicKey(rsa);</span>
+}
+&nbsp;
+/**
+ * Public Key object. This is the externally-visible object that one gets
+ * when constructing an instance from a public key. The constructor takes
+ * a native RsaWrap object.
+ */
+<span class="fstat-no" title="function not covered">function PublicKey(rsa) {</span>
+<span class="cstat-no" title="statement not covered">    var self;</span>
+&nbsp;
+<span class="fstat-no" title="function not covered">    function getExponent(encoding) {</span>
+<span class="cstat-no" title="statement not covered">        return encodeBuffer(rsa.getExponent(), encoding);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function getModulus(encoding) {</span>
+<span class="cstat-no" title="statement not covered">        return encodeBuffer(rsa.getModulus(), encoding);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function toPublicPem(encoding) {</span>
+<span class="cstat-no" title="statement not covered">        return encodeBuffer(rsa.getPublicKeyPem(), encoding);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function toPublicSsh(encoding) {</span>
+<span class="cstat-no" title="statement not covered">        return encodeBuffer(createSshPublicKey(rsa), encoding);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function toPublicSshFingerprint(encoding) {</span>
+<span class="cstat-no" title="statement not covered">        return sshFingerprint(createSshPublicKey(rsa), undefined, encoding);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function encrypt(buf, bufEncoding, outEncoding, padding) {</span>
+<span class="cstat-no" title="statement not covered">        buf = decodeString(buf, bufEncoding);</span>
+<span class="cstat-no" title="statement not covered">        padding = (padding === undefined) ?</span>
+                ursaNative.RSA_PKCS1_OAEP_PADDING : padding;
+<span class="cstat-no" title="statement not covered">        return encodeBuffer(rsa.publicEncrypt(buf, padding), outEncoding);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function publicDecrypt(buf, bufEncoding, outEncoding, padding) {</span>
+<span class="cstat-no" title="statement not covered">        buf = decodeString(buf, bufEncoding);</span>
+<span class="cstat-no" title="statement not covered">        padding = (padding === undefined) ?</span>
+                ursaNative.RSA_PKCS1_PADDING : padding;
+<span class="cstat-no" title="statement not covered">        return encodeBuffer(rsa.publicDecrypt(buf, padding), outEncoding);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function verify(algorithm, hash, sig, encoding) {</span>
+<span class="cstat-no" title="statement not covered">        algorithm = textToNid(algorithm);</span>
+<span class="cstat-no" title="statement not covered">        hash = decodeString(hash, encoding);</span>
+<span class="cstat-no" title="statement not covered">        sig = decodeString(sig, encoding);</span>
+<span class="cstat-no" title="statement not covered">        return rsa.verify(algorithm, hash, sig);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function hashAndVerify(algorithm, buf, sig, encoding,</span>
+                           use_pss_padding, salt_len) {
+<span class="cstat-no" title="statement not covered">        if (use_pss_padding) {</span>
+<span class="cstat-no" title="statement not covered">            sig = publicDecrypt(sig, encoding, undefined,</span>
+                                ursaNative.RSA_NO_PADDING);
+&nbsp;
+<span class="cstat-no" title="statement not covered">            var hash = crypto.createHash(algorithm);</span>
+<span class="cstat-no" title="statement not covered">            hash.update(decodeString(buf, encoding));</span>
+<span class="cstat-no" title="statement not covered">            buf = new Buffer(hash.digest(BINARY), BINARY);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            return rsa.verifyPSSPadding(textToNid(algorithm), buf, sig,</span>
+                    (salt_len === undefined) ? ursaNative.RSA_PKCS1_SALT_LEN_HLEN : salt_len);
+        } else {
+<span class="cstat-no" title="statement not covered">            var verifier = createVerifier(algorithm);</span>
+<span class="cstat-no" title="statement not covered">            verifier.update(buf, encoding);</span>
+<span class="cstat-no" title="statement not covered">            return verifier.verify(self, sig, encoding);</span>
+        }
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function unseal(unsealer) {</span>
+<span class="cstat-no" title="statement not covered">        return (unsealer === theUnsealer) ? self : undefined;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    self = {</span>
+        encrypt:                encrypt,
+        getExponent:            getExponent,
+        getModulus:             getModulus,
+        hashAndVerify:          hashAndVerify,
+        publicDecrypt:          publicDecrypt,
+        toPublicPem:            toPublicPem,
+        toPublicSsh:            toPublicSsh,
+        toPublicSshFingerprint: toPublicSshFingerprint,
+        verify:                 verify,
+        unseal:                 unseal
+    };
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return self;</span>
+}
+&nbsp;
+/**
+ * Private Key object. This is the externally-visible object that one
+ * gets when constructing an instance from a private key (aka a
+ * keypair). The constructor takes a native RsaWrap object.
+ */
+<span class="fstat-no" title="function not covered">function PrivateKey(rsa) {</span>
+<span class="cstat-no" title="statement not covered">    var self;</span>
+&nbsp;
+<span class="fstat-no" title="function not covered">    function getPrivateExponent(encoding) {</span>
+<span class="cstat-no" title="statement not covered">        return encodeBuffer(rsa.getPrivateExponent(), encoding);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function toPrivatePem(encoding) {</span>
+<span class="cstat-no" title="statement not covered">        return encodeBuffer(rsa.getPrivateKeyPem(), encoding);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function toEncryptedPrivatePem(passPhrase, cipher, encoding) {</span>
+<span class="cstat-no" title="statement not covered">        if(!passPhrase) <span class="cstat-no" title="statement not covered">return toPrivatePem(encoding);</span></span>
+<span class="cstat-no" title="statement not covered">        return encodeBuffer(rsa.getPrivateKeyPem(passPhrase, cipher));</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function decrypt(buf, bufEncoding, outEncoding, padding) {</span>
+<span class="cstat-no" title="statement not covered">        buf = decodeString(buf, bufEncoding);</span>
+<span class="cstat-no" title="statement not covered">        padding = (padding === undefined) ? ursaNative.RSA_PKCS1_OAEP_PADDING : padding;</span>
+<span class="cstat-no" title="statement not covered">        return encodeBuffer(rsa.privateDecrypt(buf, padding), outEncoding);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function privateEncrypt(buf, bufEncoding, outEncoding, padding) {</span>
+<span class="cstat-no" title="statement not covered">        buf = decodeString(buf, bufEncoding);</span>
+<span class="cstat-no" title="statement not covered">        padding = (padding === undefined) ? ursaNative.RSA_PKCS1_PADDING : padding;</span>
+<span class="cstat-no" title="statement not covered">        return encodeBuffer(rsa.privateEncrypt(buf, padding), outEncoding);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function sign(algorithm, hash, hashEncoding, outEncoding) {</span>
+<span class="cstat-no" title="statement not covered">        algorithm = textToNid(algorithm);</span>
+<span class="cstat-no" title="statement not covered">        hash = decodeString(hash, hashEncoding);</span>
+<span class="cstat-no" title="statement not covered">        return encodeBuffer(rsa.sign(algorithm, hash), outEncoding);</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function hashAndSign(algorithm, buf, bufEncoding, outEncoding,</span>
+                         use_pss_padding, salt_len) {
+<span class="cstat-no" title="statement not covered">        if (use_pss_padding) {</span>
+<span class="cstat-no" title="statement not covered">            var hash = crypto.createHash(algorithm);</span>
+<span class="cstat-no" title="statement not covered">            hash.update(decodeString(buf, bufEncoding));</span>
+<span class="cstat-no" title="statement not covered">            buf = new Buffer(hash.digest(BINARY), BINARY);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">            buf = rsa.addPSSPadding(textToNid(algorithm), buf,</span>
+                    (salt_len === undefined) ? ursaNative.RSA_PKCS1_SALT_LEN_HLEN : salt_len);
+&nbsp;
+<span class="cstat-no" title="statement not covered">            return privateEncrypt(buf, undefined, outEncoding,</span>
+                                  ursaNative.RSA_NO_PADDING);
+        } else {
+<span class="cstat-no" title="statement not covered">            var signer = createSigner(algorithm);</span>
+<span class="cstat-no" title="statement not covered">            signer.update(buf, bufEncoding);</span>
+<span class="cstat-no" title="statement not covered">            return signer.sign(self, outEncoding);</span>
+        }
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    self = PublicKey(rsa);</span>
+<span class="cstat-no" title="statement not covered">    self.decrypt                = decrypt;</span>
+<span class="cstat-no" title="statement not covered">    self.getPrivateExponent     = getPrivateExponent;</span>
+<span class="cstat-no" title="statement not covered">    self.hashAndSign            = hashAndSign;</span>
+<span class="cstat-no" title="statement not covered">    self.privateEncrypt         = privateEncrypt;</span>
+<span class="cstat-no" title="statement not covered">    self.sign                   = sign;</span>
+<span class="cstat-no" title="statement not covered">    self.toPrivatePem           = toPrivatePem;</span>
+<span class="cstat-no" title="statement not covered">    self.toEncryptedPrivatePem  = toEncryptedPrivatePem;</span>
+<span class="cstat-no" title="statement not covered">    return self;</span>
+}
+&nbsp;
+&nbsp;
+/*
+ * Exported bindings
+ */
+&nbsp;
+/**
+ * Create a new public key object, from the given PEM-encoded file.
+ */
+<span class="fstat-no" title="function not covered">function createPublicKey(pem, encoding) {</span>
+<span class="cstat-no" title="statement not covered">    var rsa = new RsaWrap();</span>
+<span class="cstat-no" title="statement not covered">    pem = decodeString(pem, encoding);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    try {</span>
+<span class="cstat-no" title="statement not covered">        rsa.setPublicKeyPem(pem);</span>
+    } catch (ex) {
+<span class="cstat-no" title="statement not covered">        if (!isPublicKeyPem(pem)) {</span>
+<span class="cstat-no" title="statement not covered">            throw new Error("Not a public key.");</span>
+        }
+<span class="cstat-no" title="statement not covered">        throw ex;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return PublicKey(rsa);</span>
+}
+&nbsp;
+/**
+ * Create a new private key object, from the given PEM-encoded file,
+ * optionally decrypting the file with a password.
+ */
+<span class="fstat-no" title="function not covered">function createPrivateKey(pem, password, encoding) {</span>
+<span class="cstat-no" title="statement not covered">    var rsa = new RsaWrap();</span>
+<span class="cstat-no" title="statement not covered">    pem = decodeString(pem, encoding);</span>
+<span class="cstat-no" title="statement not covered">    password = decodeString(password, encoding);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    try {</span>
+        // Note: The native code is sensitive to the actual number of
+        // arguments. It's *not* okay to pass undefined as a password.
+<span class="cstat-no" title="statement not covered">        if (password) {</span>
+<span class="cstat-no" title="statement not covered">            rsa.setPrivateKeyPem(pem, password);</span>
+        } else {
+<span class="cstat-no" title="statement not covered">            rsa.setPrivateKeyPem(pem);</span>
+        }
+    } catch (ex) {
+<span class="cstat-no" title="statement not covered">        if (!isPrivateKeyPem(pem)) {</span>
+<span class="cstat-no" title="statement not covered">            throw new Error("Not a private key.");</span>
+        }
+<span class="cstat-no" title="statement not covered">        throw ex;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return PrivateKey(rsa);</span>
+}
+&nbsp;
+/**
+  * Create public key from components
+  */
+<span class="fstat-no" title="function not covered">function createPublicKeyFromComponents(modulus, exponent) {</span>
+<span class="cstat-no" title="statement not covered">    var rsa = new RsaWrap();</span>
+<span class="cstat-no" title="statement not covered">    rsa.createPublicKeyFromComponents(modulus, exponent);</span>
+<span class="cstat-no" title="statement not covered">    return PublicKey(rsa);</span>
+}
+&nbsp;
+/**
+ * Create private key from components
+ */
+<span class="fstat-no" title="function not covered">function createPrivateKeyFromComponents(modulus, exponent, p, q, dp, dq, inverseQ, d) {</span>
+<span class="cstat-no" title="statement not covered">    var rsa = new RsaWrap();</span>
+<span class="cstat-no" title="statement not covered">    rsa.createPrivateKeyFromComponents(modulus, exponent, p, q, dp, dq, inverseQ, d);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return PrivateKey(rsa);</span>
+}
+&nbsp;
+/**
+ * Generate a new private key object (aka a keypair).
+ */
+<span class="fstat-no" title="function not covered">function generatePrivateKey(modulusBits, exponent) {</span>
+<span class="cstat-no" title="statement not covered">    if (modulusBits === undefined) {</span>
+<span class="cstat-no" title="statement not covered">        modulusBits = 2048;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (exponent === undefined) {</span>
+<span class="cstat-no" title="statement not covered">        exponent = 65537;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var rsa = new RsaWrap();</span>
+<span class="cstat-no" title="statement not covered">    rsa.generatePrivateKey(modulusBits, exponent);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return PrivateKey(rsa);</span>
+}
+&nbsp;
+/**
+ * Create a key object from a PEM format file, either a private or
+ * public key depending on what kind of file is passed in. If given
+ * a private key file, it must not be encrypted.
+ */
+<span class="fstat-no" title="function not covered">function createKey(pem, encoding) {</span>
+<span class="cstat-no" title="statement not covered">    pem = decodeString(pem, encoding);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (isPublicKeyPem(pem)) {</span>
+<span class="cstat-no" title="statement not covered">        return createPublicKey(pem);</span>
+    } else <span class="cstat-no" title="statement not covered">if (isPrivateKeyPem(pem)) {</span>
+<span class="cstat-no" title="statement not covered">        return createPrivateKey(pem);</span>
+    } else {
+<span class="cstat-no" title="statement not covered">        throw new Error("Not a key.");</span>
+    }
+}
+&nbsp;
+/**
+ * Return the SSH-style public key fingerprint of the given SSH-format
+ * public key.
+ */
+<span class="fstat-no" title="function not covered">function sshFingerprint(sshKey, sshEncoding, outEncoding) {</span>
+<span class="cstat-no" title="statement not covered">    var hash = crypto.createHash(MD5);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    hash.update(decodeString(sshKey, sshEncoding));</span>
+<span class="cstat-no" title="statement not covered">    var result = new Buffer(hash.digest(BINARY), BINARY);</span>
+<span class="cstat-no" title="statement not covered">    return encodeBuffer(result, outEncoding);</span>
+}
+&nbsp;
+/**
+ * Return whether the given object is a key object (either public or
+ * private), as constructed by this module.
+ */
+<span class="fstat-no" title="function not covered">function isKey(obj) {</span>
+<span class="cstat-no" title="statement not covered">    var obj2;</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    try {</span>
+<span class="cstat-no" title="statement not covered">        var unseal = obj.unseal;</span>
+<span class="cstat-no" title="statement not covered">        if (typeof unseal !== "function") {</span>
+<span class="cstat-no" title="statement not covered">            return false;</span>
+        }
+<span class="cstat-no" title="statement not covered">        obj2 = unseal(theUnsealer);</span>
+    } catch (ex) {
+        // Ignore; can't assume that other objects obey any particular
+        // unsealing protocol.
+        // TODO: Log?
+<span class="cstat-no" title="statement not covered">        return false;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return obj2 !== undefined;</span>
+}
+&nbsp;
+/**
+ * Return whether the given object is a private key object, as
+ * constructed by this module.
+ */
+<span class="fstat-no" title="function not covered">function isPrivateKey(obj) {</span>
+<span class="cstat-no" title="statement not covered">    return isKey(obj) &amp;&amp; (obj.decrypt !== undefined);</span>
+}
+&nbsp;
+/**
+ * Return whether the given object is a public key object (per se), as
+ * constructed by this module.
+ */
+<span class="fstat-no" title="function not covered">function isPublicKey(obj) {</span>
+<span class="cstat-no" title="statement not covered">    return isKey(obj) &amp;&amp; !isPrivateKey(obj);</span>
+}
+&nbsp;
+/**
+ * Assert wrapper for isKey().
+ */
+<span class="fstat-no" title="function not covered">function assertKey(obj) {</span>
+<span class="cstat-no" title="statement not covered">    assert(isKey(obj));</span>
+}
+&nbsp;
+/**
+ * Assert wrapper for isPrivateKey().
+ */
+<span class="fstat-no" title="function not covered">function assertPrivateKey(obj) {</span>
+<span class="cstat-no" title="statement not covered">    assert(isPrivateKey(obj));</span>
+}
+&nbsp;
+/**
+ * Assert wrapper for isPublicKey().
+ */
+<span class="fstat-no" title="function not covered">function assertPublicKey(obj) {</span>
+<span class="cstat-no" title="statement not covered">    assert(isPublicKey(obj));</span>
+}
+&nbsp;
+/**
+ * Coerce the given key value into an private key object, returning
+ * it. If given a private key object, this just returns it as-is. If
+ * given a string or Buffer, it tries to parse it as PEM. Anything
+ * else is an error.
+ */
+<span class="fstat-no" title="function not covered">function coercePrivateKey(orig) {</span>
+<span class="cstat-no" title="statement not covered">    if (isPrivateKey(orig)) {</span>
+<span class="cstat-no" title="statement not covered">        return orig;</span>
+    } else <span class="cstat-no" title="statement not covered">if (isStringOrBuffer(orig)) {</span>
+<span class="cstat-no" title="statement not covered">        return createPrivateKey(orig);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    throw new Error("Not a private key: " + orig);</span>
+}
+&nbsp;
+/**
+ * Coerce the given key value into a public key object, returning
+ * it. If given a private key object, this just returns it as-is. If
+ * given a string or Buffer, it tries to parse it as PEM. Anything
+ * else is an error.
+ */
+<span class="fstat-no" title="function not covered">function coercePublicKey(orig) {</span>
+<span class="cstat-no" title="statement not covered">    if (isPublicKey(orig)) {</span>
+<span class="cstat-no" title="statement not covered">        return orig;</span>
+    } else <span class="cstat-no" title="statement not covered">if (isStringOrBuffer(orig)) {</span>
+<span class="cstat-no" title="statement not covered">        return createPublicKey(orig);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    throw new Error("Not a public key: " + orig);</span>
+}
+&nbsp;
+/**
+ * Coerce the given key value into a key object (either public or
+ * private), returning it. If given a private key object, this just
+ * returns it as-is. If given a string or Buffer, it tries to parse it
+ * as PEM. Anything else is an error.
+ */
+<span class="fstat-no" title="function not covered">function coerceKey(orig) {</span>
+<span class="cstat-no" title="statement not covered">    if (isKey(orig)) {</span>
+<span class="cstat-no" title="statement not covered">        return orig;</span>
+    } else <span class="cstat-no" title="statement not covered">if (isStringOrBuffer(orig)) {</span>
+<span class="cstat-no" title="statement not covered">        return createKey(orig);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    throw new Error("Not a key: " + orig);</span>
+}
+&nbsp;
+/**
+ * Check whether the two objects are both keys of some sort and
+ * have the same public part.
+ */
+<span class="fstat-no" title="function not covered">function matchingPublicKeys(key1, key2) {</span>
+<span class="cstat-no" title="statement not covered">    if (!(isKey(key1) &amp;&amp; isKey(key2))) {</span>
+<span class="cstat-no" title="statement not covered">        return false;</span>
+    }
+&nbsp;
+    // This isn't the most efficient implementation, but it will suffice:
+    // We convert both to ssh form, which has very little leeway for
+    // variation, and compare bytes.
+&nbsp;
+<span class="cstat-no" title="statement not covered">    var ssh1 = key1.toPublicSsh(UTF8);</span>
+<span class="cstat-no" title="statement not covered">    var ssh2 = key2.toPublicSsh(UTF8);</span>
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return ssh1 === ssh2;</span>
+}
+&nbsp;
+/**
+ * Check whether the two objects are both keys of some sort, are
+ * both public or both private, and have the same contents.
+ */
+<span class="fstat-no" title="function not covered">function equalKeys(key1, key2) {</span>
+    // See above for rationale. In this case, there's no ssh form for
+    // private keys, so we just use PEM for that.
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (isPrivateKey(key1) &amp;&amp; isPrivateKey(key2)) {</span>
+<span class="cstat-no" title="statement not covered">        var pem1 = key1.toPrivatePem(UTF8);</span>
+<span class="cstat-no" title="statement not covered">        var pem2 = key2.toPrivatePem(UTF8);</span>
+<span class="cstat-no" title="statement not covered">        return pem1 === pem2;</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    if (isPublicKey(key1) &amp;&amp; isPublicKey(key2)) {</span>
+<span class="cstat-no" title="statement not covered">        return matchingPublicKeys(key1, key2);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    return false;</span>
+}
+&nbsp;
+/**
+ * Create a signer object.
+ */
+<span class="fstat-no" title="function not covered">function createSigner(algorithm) {</span>
+<span class="cstat-no" title="statement not covered">    var hash = crypto.createHash(algorithm);</span>
+<span class="cstat-no" title="statement not covered">    var self = {};</span>
+&nbsp;
+<span class="fstat-no" title="function not covered">    function update(buf, bufEncoding) {</span>
+<span class="cstat-no" title="statement not covered">        buf = decodeString(buf, bufEncoding);</span>
+<span class="cstat-no" title="statement not covered">        hash.update(buf);</span>
+<span class="cstat-no" title="statement not covered">        return self;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function sign(privateKey, outEncoding) {</span>
+<span class="cstat-no" title="statement not covered">        var hashBuf = new Buffer(hash.digest(BINARY), BINARY);</span>
+<span class="cstat-no" title="statement not covered">        return privateKey.sign(algorithm, hashBuf, undefined, outEncoding);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    self.sign = sign;</span>
+<span class="cstat-no" title="statement not covered">    self.update = update;</span>
+<span class="cstat-no" title="statement not covered">    return self;</span>
+}
+&nbsp;
+/**
+ * Create a verifier object.
+ */
+<span class="fstat-no" title="function not covered">function createVerifier(algorithm) {</span>
+<span class="cstat-no" title="statement not covered">    var hash = crypto.createHash(algorithm);</span>
+<span class="cstat-no" title="statement not covered">    var self = {};</span>
+&nbsp;
+<span class="fstat-no" title="function not covered">    function update(buf, bufEncoding) {</span>
+<span class="cstat-no" title="statement not covered">        buf = decodeString(buf, bufEncoding);</span>
+<span class="cstat-no" title="statement not covered">        hash.update(buf);</span>
+<span class="cstat-no" title="statement not covered">        return self;</span>
+    }
+&nbsp;
+<span class="fstat-no" title="function not covered">    function verify(publicKey, sig, sigEncoding) {</span>
+<span class="cstat-no" title="statement not covered">        var hashBuf = new Buffer(hash.digest(BINARY), BINARY);</span>
+<span class="cstat-no" title="statement not covered">        sig = decodeString(sig, sigEncoding);</span>
+<span class="cstat-no" title="statement not covered">        return publicKey.verify(algorithm, hashBuf, sig);</span>
+    }
+&nbsp;
+<span class="cstat-no" title="statement not covered">    self.update = update;</span>
+<span class="cstat-no" title="statement not covered">    self.verify = verify;</span>
+<span class="cstat-no" title="statement not covered">    return self;</span>
+}
+&nbsp;
+&nbsp;
+/*
+ * Initialization
+ */
+&nbsp;
+module.exports = {
+    assertKey:                      assertKey,
+    assertPrivateKey:               assertPrivateKey,
+    assertPublicKey:                assertPublicKey,
+    coerceKey:                      coerceKey,
+    coercePrivateKey:               coercePrivateKey,
+    coercePublicKey:                coercePublicKey,
+    createKey:                      createKey,
+    createPrivateKey:               createPrivateKey,
+    createPrivateKeyFromComponents: createPrivateKeyFromComponents,
+    openSshPublicKey:               openSshPublicKey,
+    createPublicKey:                createPublicKey,
+    createPublicKeyFromComponents:  createPublicKeyFromComponents,
+    createSigner:                   createSigner,
+    createVerifier:                 createVerifier,
+    equalKeys:                      equalKeys,
+    generatePrivateKey:             generatePrivateKey,
+    isKey:                          isKey,
+    isPrivateKey:                   isPrivateKey,
+    isPublicKey:                    isPublicKey,
+    matchingPublicKeys:             matchingPublicKeys,
+    sshFingerprint:                 sshFingerprint,
+    RSA_NO_PADDING:                 ursaNative.RSA_NO_PADDING,
+    RSA_PKCS1_PADDING:              ursaNative.RSA_PKCS1_PADDING,
+    RSA_PKCS1_OAEP_PADDING:         ursaNative.RSA_PKCS1_OAEP_PADDING,
+    RSA_PKCS1_SALT_LEN_HLEN:        ursaNative.RSA_PKCS1_SALT_LEN_HLEN,
+    RSA_PKCS1_SALT_LEN_MAX:         ursaNative.RSA_PKCS1_SALT_LEN_MAX,
+    RSA_PKCS1_SALT_LEN_RECOVER:     ursaNative.RSA_PKCS1_SALT_LEN_RECOVER
+};
+&nbsp;
+&nbsp;</pre></td></tr>
+</tbody></table></pre>
+</div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Thu Apr 20 2017 04:26:51 GMT+0000 (UTC)</div>
+</div>
+
+
+</body></html>
